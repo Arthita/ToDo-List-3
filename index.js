@@ -5,16 +5,20 @@ const listItems = document.getElementById("list-items");
 let tasks = [];
 
 addBtn.addEventListener("click", () => {
-  tasks.push(inputValue.value);
-  localStorage.setItem("value", JSON.stringify(tasks));
-  inputValue.value = "";
-  renderTasks();
+  if (inputValue.value) {
+    tasks.push(inputValue.value);
+    localStorage.setItem("value", JSON.stringify(tasks));
+    inputValue.value = "";
+    renderTasks();
+  }
 });
 
 listItems.addEventListener("click", (e) => {
-  tasks = tasks.filter((task) => task != e.target.id);
-  localStorage.setItem("value", JSON.stringify(tasks));
-  renderTasks();
+  if (e.target.id) {
+    tasks = tasks.filter((task) => task != e.target.id);
+    localStorage.setItem("value", JSON.stringify(tasks));
+    renderTasks();
+  }
 });
 
 function renderTasks() {
